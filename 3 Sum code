@@ -1,0 +1,40 @@
+public class Solution {
+    public int threeSumClosest(int[] A, int B) {
+        //I will be using two pointers apporach for which I need a sorted array.
+        Arrays.sort(A);
+        long bestSoFar = (long)Integer.MAX_VALUE;
+        long nearestValue = (long)Integer.MAX_VALUE;
+        for(int x=0;x<A.length;x++){
+            int a = A[x];
+            int i=0;
+            int j = A.length-1;
+            int find = B-a;
+            while(i<j){
+                //just making sure that I don't pick the same index again.
+                if(i==x){i++;continue;}
+                if(j==x){
+                    j--;
+                    continue;
+                }
+                    int sum = A[i]+A[j];
+                    if(bestSoFar>Math.abs((long)(sum+a)-(long)B)){
+                        nearestValue = sum+a;
+                        bestSoFar = Math.min(bestSoFar,(int)Math.abs((sum+a)-B));
+
+                    }
+                    if(sum<find){
+                        i++;
+                    }
+                    else if(sum>find){
+                        j--;
+                    }
+                    else break;
+                }
+
+            }
+
+        
+        return (int)nearestValue;
+    }
+}
+
